@@ -13,14 +13,9 @@ export function clientsReducer(state = clientsInitialState, action = {}) {
       const newUserId = stateLen > 0 ? state[state.length - 1].id + 1 : 1;
       return [...state, { ...action.payload, id: newUserId }];
     }
-    case clientsActions.DELETE_CLIENT: {
-      const userIndex = state.findIndex(
-        (item) => item.id === action.payload.id
-      );
-      const newState = [...state];
-      newState.splice(userIndex, 1);
-      return newState;
-    }
+    case clientsActions.DELETE_CLIENT:
+      return state.filter((item) => item.id !== action.payload.id);
+
     case clientsActions.EDITE_CLIENT: {
       const userIndex = state.findIndex(
         (item) => item.id === action.payload.id

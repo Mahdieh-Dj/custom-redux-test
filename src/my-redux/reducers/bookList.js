@@ -21,17 +21,10 @@ export function bookList(state = bookListInitialState, action = {}) {
       return newState;
     }
     case bookListActions.ADD_USER: {
-      const newState = [...state];
-      newState.push(action.payload.user);
-      return newState;
+      return [...state, action.payload.user];
     }
     case bookListActions.DELETE_USER: {
-      const userIndex = state.findIndex(
-        (item) => item.name === action.payload.name
-      );
-      const newState = [...state];
-      newState.splice(userIndex, 1);
-      return newState;
+      return state.filter((item) => item.name !== action.payload.name);
     }
     default:
       return state;
